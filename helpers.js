@@ -13,8 +13,9 @@ module.exports.startDate = (available, start) => {
 		}
 	}
 }
+func 
 
-module.exports.stock = func(amount,data){
-	this.quantity = math.floor(amount/data.data[0][4]);
+module.exports.stock = function(amount,data){
+	this.quantity = Math.floor(amount/data.data[0][4]);
 	this.leftover = amount%data.data[0][4];
 };
