@@ -37,23 +37,15 @@ app.post('/api/graphCalc', (req,res) => {
 					body = JSON.parse(body);
 					currTick.quantity = Math.floor(parseInt(req.body.amount,10)/body.dataset.data[0][4]);
 					currTick.leftover = parseInt(req.body.amount,10)%body.dataset.data[0][4];
-
-
-					/**
-						this.quantity = Math.floor(amount/data.data[0][4]);
-						this.leftover = amount%data.data[0][4];
-
-
-					*/
 					currTick.data = [];
 					body.dataset.data.forEach((element)=> {
 						if(element[6]!=0){
 							currTick.leftover += (currTick.quantity*element[6]);
 							currTick.quantity += Math.floor(currTick.leftover/element[4]);
 							currTick.leftover = (currTick.leftover%element[4]);
-							let ins = [element[0],element[4]];
-							currTick.data.push(ins);
 						}
+						let ins = [element[0],element[4]];
+						currTick.data.push(ins);
 					});
 					currTick.start = body.dataset.data[0][0];
 					currTick.end = body.dataset.data[body.dataset.data.length-1][0];
