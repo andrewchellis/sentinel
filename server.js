@@ -33,7 +33,17 @@ app.post('/api/graphCalc', (req,res) => {
 					console.log(err);
 				}
 				else{
-					let currTick = new helpers.stock(req.body.amount,body.dataset);
+					let currTick = {};
+					currTick.quantity = Math.floor(parseInt(req.body.amount,10)/body.dataset.data[0][4]);
+					currTick.leftover = parseInt(req.body.amount,10)%body.dataset.data[0][4];
+
+
+					/**
+						this.quantity = Math.floor(amount/data.data[0][4]);
+						this.leftover = amount%data.data[0][4];
+
+
+					*/
 					currTick.data = [];
 					body.data.forEach((element)=> {
 						if(element[6]!=0){

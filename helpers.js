@@ -13,7 +13,6 @@ module.exports.startDate = (available, start) => {
 		}
 	}
 }
-func 
 
 module.exports.stock = function(amount,data){
 	this.quantity = Math.floor(amount/data.data[0][4]);
