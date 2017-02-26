@@ -123,7 +123,6 @@ function graphing(outData) {
 	}
 
 	var layout = {
-	  title: 'Connect the Gaps Between Data',
 	  showlegend: true,
 	  filename: "legend-labels"
 	};
