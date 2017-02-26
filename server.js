@@ -34,6 +34,7 @@ app.post('/api/graphCalc', (req,res) => {
 				}
 				else{
 					let currTick = {};
+					body = JSON.parse(body);
 					currTick.quantity = Math.floor(parseInt(req.body.amount,10)/body.dataset.data[0][4]);
 					currTick.leftover = parseInt(req.body.amount,10)%body.dataset.data[0][4];
 
@@ -45,7 +46,7 @@ app.post('/api/graphCalc', (req,res) => {
 
 					*/
 					currTick.data = [];
-					body.data.forEach((element)=> {
+					body.dataset.data.forEach((element)=> {
 						if(element[6]!=0){
 							currTick.leftover += (currTick.quantity*element[6]);
 							currTick.quantity += Math.floor(currTick.leftover/element[4]);
@@ -55,8 +56,8 @@ app.post('/api/graphCalc', (req,res) => {
 						}
 					});
 					currTick.start = body.dataset.data[0][0];
-					currTick.end = body.dataset.data[body.dataset.data.length][0];
-					currTick.stock = currTick.quantity*body.dataset.data[body.dataset.data.length][4];
+					currTick.end = body.dataset.data[body.dataset.data.length-1][0];
+					currTick.stock = currTick.quantity*body.dataset.data[body.dataset.data.length-1][4];
 					currTick.total = currTick.stock + currTick.leftover;
 					currTick.percent = currTick.total/req.body.amount;
 					resp[ticker] = currTick;
