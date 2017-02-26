@@ -76,6 +76,58 @@ function submission() {
 		"reinvest": dividends,
 		"companies": companies
 	};
-	var myJSON = JSON.stringify(data);
-	document.getElementById("results").innerHTML = myJSON;
+	$.post("/api/graphCalc", data)
+	.done((response)=> {
+		document.getElementById('results').innerHTML=JSON.stringify(response);
+		graphing(response);
+	});
+
+}
+
+function graphing(outData) {
+
+  TESTER = document.getElementById('tester');
+
+	var yData = [];
+	var xData = [];
+	var subListSizes = [];
+	var lineSize = [];
+	var labels = [];
+	var i = 0;
+	Object.keys(outData).forEach((element)=> {
+		lineSize.push(2);
+		labels.push(element);
+		var entryy = [];
+		var entryx = [];
+		let evaluate = outData[element];
+		subListSizes.push(evaluate.data.length);
+		for (var j = 0; j < evaluate.data.length; j++) {
+			entryy.push(evaluate.data[j][1]);
+			entryx.push(evaluate.data[j][0]);
+		}
+		yData.push(entryy);
+		xData.push(entryx);
+		i++;
+	});
+	//document.getElementById("results").innerHTML = subListSizes[0];
+	var finalData = [];
+	for (var i = 0; i < labels.length; i++) {
+		var trace = {
+			x: xData[i],
+			y: yData[i],
+			mode: 'lines',
+			name: labels[i],
+			connectgaps: true
+		};
+		finalData.push(trace);
+	}
+
+	var layout = {
+	  title: 'Connect the Gaps Between Data',
+	  showlegend: true,
+	  filename: "legend-labels"
+	};
+
+	Plotly.newPlot(TESTER, finalData, layout);
+
 }
