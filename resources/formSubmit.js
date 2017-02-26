@@ -76,12 +76,11 @@ function submission() {
 		"reinvest": dividends,
 		"companies": companies
 	};
-	var myJSON = JSON.stringify(data);
-	$.post("/api/graphCalc", myJSON)
-	.done((data)=> {
-		document.getElementById('results').innerHTML=data;
+	$.post("/api/graphCalc", data)
+	.done((response)=> {
+		document.getElementById('results').innerHTML=JSON.stringify(response);
 		graphing();
-	}
+	});
 }
 
 function graphing() {
