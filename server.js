@@ -40,9 +40,14 @@ app.post('/api/graphCalc', (req,res) => {
 					currTick.data = [];
 					body.dataset.data.forEach((element)=> {
 						if(element[6]!=0){
-							currTick.leftover += (currTick.quantity*element[6]);
-							currTick.quantity += Math.floor(currTick.leftover/element[4]);
-							currTick.leftover = (currTick.leftover%element[4]);
+							if(req.body.reinvest==='true'){
+								currTick.leftover += (currTick.quantity*element[6]);
+								currTick.quantity += Math.floor(currTick.leftover/element[4]);
+								currTick.leftover = (currTick.leftover%element[4]);
+							}
+							else{
+								currTick.leftover += (currTick.quantity*element[6]);
+							}
 						}
 						let ins = [element[0],element[4]];
 						currTick.data.push(ins);

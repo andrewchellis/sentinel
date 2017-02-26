@@ -78,7 +78,17 @@ function submission() {
 	};
 	$.post("/api/graphCalc", data)
 	.done((response)=> {
-		document.getElementById('results').innerHTML=JSON.stringify(response);
+		let clearResults = document.getElementById("results");
+		while (clearResults.firstChild) {
+		    clearResults.removeChild(clearResults.firstChild);
+		}
+		Object.keys(response).forEach((element)=> {
+			let resultIns = document.createElement('P');
+			let result = document.createTextNode(element+" investment has a value of " + response[element].total.toFixed(2) + " with " + response[element].stock.toFixed(2) +" in stock and "+ response[element].leftover.toFixed(2) + " in cash for a total % return of: "+(100*response[element].percent).toFixed(2)+"\n");
+			resultIns.append(result);
+			document.getElementById('results').append(resultIns);
+
+		});
 		graphing(response);
 	});
 
