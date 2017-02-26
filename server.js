@@ -34,10 +34,8 @@ app.post('/api/graphCalc', (req,res) => {
 					console.log(body);
 				}
 			}
-		});
+		);
 	});
-
-
 	res.json(resp);
 });
 
