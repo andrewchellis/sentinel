@@ -26,17 +26,16 @@ app.get('/resources/:file',(req,res)=>{
 
 app.post('/api/graphCalc', (req,res) => {
 	let resp = {}, date;
-
-	req.body.companies.foreach((ticker) => {
+	req.body.companies.forEach((ticker) => {
 		request.get(quandl+ticker+".json?column_index=4&start_date="+req.body.start+"&end_date="+req.body.end+"&collapse=daily&api_key="+helpers.api_key,
 			function(err,response,body){
 				if(err){
 					console.log(err);
 				}
 				else{
-					resp.ticker=body;
+					resp[ticker]=body;
 					if(Object.keys(resp).length===req.body.companies.length){
-						res.send(resp);
+						res.json(resp);
 					}
 				}
 			}
