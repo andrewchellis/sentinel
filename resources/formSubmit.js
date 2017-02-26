@@ -76,52 +76,18 @@ function submission() {
 		"reinvest": dividends,
 		"companies": companies
 	};
-	// $.post("/api/graphCalc", data)
-	// .done((response)=> {
-	// 	document.getElementById('results').innerHTML=JSON.stringify(response);
-	// 	graphing(response);
-	// });
+	$.post("/api/graphCalc", data)
+	.done((response)=> {
+		document.getElementById('results').innerHTML=JSON.stringify(response);
+		graphing(response);
+	});
 
-
-	graphing(data);
 }
 
-function graphing(response) {
-
-	var outData = {
-		"APPL": {
-			"total": 15900,
-			"return": 159.00,
-			"stock": 12345,
-			"leftover": 121,
-			"start": "2011-01-31",
-			"end": "2017-01-25",
-			"data": [["2015-01-01", 200], ["2015-01-02", 201], ["2015-01-02", 202], ["2015-01-03", 203], ["2015-01-04", 204], ["2015-01-05", 205], ["2015-01-06", 206], ["2015-01-07", 207], ["2015-01-08", 208], ["2015-01-09", 209], ["2015-01-10", 210], ["2015-01-11", 211], ["2015-01-12", 212], ["2015-01-13", 213]]
-		},
-
-		"GOOG": {
-			"total": 10000,
-			"return": 100.00,
-			"stock": 1250,
-			"leftover": 11,
-			"start": "2011-01-31",
-			"end": "2017-01-25",
-			"data": [["2015-01-01", 100], ["2015-01-02", 101], ["2015-01-02", 102], ["2015-01-03", 103], ["2015-01-04", 104], ["2015-01-05", 105], ["2015-01-06", 106], ["2015-01-07", 107], ["2015-01-08", 108], ["2015-01-09", 109], ["2015-01-10", 110], ["2015-01-11", 111], ["2015-01-12", 112], ["2015-01-13", 113]]
-		},
-		"IBM": {
-			"total": 20120,
-			"return": 201.20,
-			"stock": 90,
-			"leftover": 12,
-			"start": "2011-01-31",
-			"end": "2017-01-25",
-			"data": [["2015-01-01", 300], ["2015-01-02", 301], ["2015-01-02", 302], ["2015-01-03", 303], ["2015-01-04", 304], ["2015-01-05", 305], ["2015-01-06", 306], ["2015-01-07", 307], ["2015-01-08", 308], ["2015-01-09", 309], ["2015-01-10", 310], ["2015-01-11", 311], ["2015-01-12", 312], ["2015-01-13", 313]]
-		},
-	};
+function graphing(outData) {
 
   TESTER = document.getElementById('tester');
 
-  	
 	var yData = [];
 	var xData = [];
 	var subListSizes = [];
