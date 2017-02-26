@@ -14,3 +14,7 @@ module.exports.startDate = (available, start) => {
 	}
 }
 
+module.exports.stock = func(amount,data){
+	this.quantity = math.floor(amount/data.data[0][4]);
+	this.leftover = amount%data.data[0][4];
+};
