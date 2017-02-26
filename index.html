@@ -22,6 +22,8 @@
 
       <link rel="stylesheet" type="text/css" href="resources/mystyle.css">
       <script type="text/javascript" src="resources/formSubmit.js"></script>
+
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     </head>
 
    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -62,7 +64,7 @@
      <div class="row">
        <div class="col s12">
           <div class="input_fields">
-            <div><input placeholder="Company Ticker" type="text" name="mytext[]"></div>
+            <div><input placeholder="Company Ticker" type="text" name="comp[]"></div>
             <div class="input_fields_wrap" style="padding-bottom: 10px;">
               
             </div>
@@ -73,20 +75,32 @@
 
      <div class="row">
        <div class="col s12">
-         <button type="button" onclick="submission()">Submit</button>
+         <button class="waves-effect waves-light btn" type="button" onclick="submission()">Submit</button>
        </div>
      </div>
 
     </form>
-    <div id="results">
-      
-    </div>
+    
+
+    <div id="results" style="padding-bottom: 20px;">  </div>
+
+    <div id="tester"></div>
+
+
    </div>
     
 
 
 
   </body>
+  <script>
+  TESTER = document.getElementById('tester');
+  Plotly.plot( TESTER, [{
+  x: [1, 2, 3, 4, 5],
+  y: [1, 2, 4, 8, 16] }], {
+  margin: { t: 0 } } );
+</script>
+
   <script type="text/javascript">
     $('.datepicker').pickadate({
       selectMonths: true, // Creates a dropdown to control month
@@ -103,7 +117,7 @@
             e.preventDefault();
             if(x < max_fields){ //max input box allowed
                 x++; //text box increment
-                $(wrapper).append('<div><input placeholder="Company Ticker" type="text" name="mytext[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                $(wrapper).append('<div><input placeholder="Company Ticker" type="text" name="comp[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
             }
         });
        
